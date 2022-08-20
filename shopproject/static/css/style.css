@@ -1,0 +1,50 @@
+.card
+  { text-align:center;}
+  .card-img-top{
+  height:200px;}
+
+ .nav-item{
+ letter-spacing:0.15em;}
+
+ .My_footer p{
+    padding-top:10px;
+    font-size:13;
+    }
+    .My_footer{
+     background-color:#ECDAF4;
+     height:40px;}
+.card{box-shadow: 10px 10px 5px #b0c4de;}
+
+.mysearch_text{
+padding-top:20px;}
+
+.Mytable{
+min-width:200px;}
+.mythead{
+letter-spacing:0.2em;
+text-align:center;}
+
+.custom_a{
+text-decoration:none;}
+
+.custom_icon{
+text-decoration:none;}
+
+.Mybutton{
+margin-top:5px;}
+
+}
+.my_desc_text{
+padding-right:20px;}
+
+.my_pro_title{
+font-size:30px;
+}
+.Myhead{text-align:center;}
+.custom_image{
+width:200px;
+height:150px;}
+
+good{width:200px;}
+.Mycart{font-size:30px;
+font-family:calibri;}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+    <div>
+        <div>
+        {% block description %}
+        {% if category %}
+            {{category.description|truncatewords:100}}
+        {% else %}
+            different categories
+        {% endif %}
+        {% endblock %}
+
+    </div>
+</div>
+
+<div>
+    <div>
+        {% block title %}
+            {% if category %}
+                {{category.name}}
+            {% else %}
+                category name
+            {% endif %}
+        {% endblock %}
+    </div>
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+        {% block body %}
+                <div class="container">
+            {% if category %}
+                <a href="{% url 'shop:allproducts' %}">Products collections</a> >> {{category.name}}<br><br>
+        {% endif %}
+                    </div>
+            {% if category %}
+                <img src="{% static 'img/banner.jpg' %}" width="1500" height="300" style="padding-left:90px; padding-right:240px;"><br><br>
+                <div class="container">
+                    <a href="{{i.get_url}}"></a>
+                    <h2 style="text-align:center;text-transform:uppercase;color:#F1A8E6; text-shadow: 2px 3px 4px black ;">{{category.name}}</h2><br>
+                    <img src="{{category.image.url}}" style="margin-left:350px;width=200px; height:200px;" ><br><br>
+                    <h5>{{category.description}}</h5>
+                    </div>
+            {% else %}
+                <img src="{% static 'img/banner.jpg' %}" width="1500" height="300" style="padding-left:90px; padding-right:240px;"><br><br>
+                 <h1 style="text-align:center;color:#ee82ee;text-shadow:2px 2px 8px black;">Our products</h1><br>
+            {% endif %}
+        </div>
+        </div>
+        </div>
+
+
+
+
+<div>
+    <div>
+
+        <div class="container">
+         <div class="row">
+             {% for i in products.object_list %}
+             <div class="col-sm-4 "><br>
+                 <div class="card text-center" style="width: 18rem;">
+                     <a href="{{i.get_url }}"><img class="card-img-top" src="{{ i.image.url }}" alt="Card image cap"></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name }}</h5>
+                        <p class="card-text">{{ i.price }}</p>
+
+     </div>
+         </div>
+             </div><br>
+
+             {% endfor %}
+            <div class="mx-auto">
+                {% if products.paginator.num_pages > 1 %}<br>
+
+                 <div>
+                    <div>
+                        <div class="text-center">
+                            {% for pg in products.paginator.page_range %}
+                                <a href="?page={{pg}}"  class="btn btn-light btn-sm-3 {% if products.number == pg %} active {% endif %}}">{{pg}}</a>
+                        </div>
+                    </div>
+                 </div>
+                            {% endfor %}
+                {% endif %}
+         </div>
+</div>
+         </div>
+</div>
+</div>
+ {% endblock %}

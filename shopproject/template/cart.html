@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+{% if not cartitems %}
+<div>
+    <div class="text-center">
+        <p >Cart is empty </p>
+        <p class="text-center">
+            Add products to <a href="{% url 'shop:allproducts' %}">cart</a>
+        </p>
+    </div>
+</div>
+{% else %}
+<div>
+    <div class="text-center Mycart ">
+        Your cart
+    </div>
+</div><br>
+<div class="container">
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-7 text-center">
+        <table class=" table Mytable">
+            <thead class="thead mythead">
+            <tr>
+                <th colspan="5">
+                    Your items
+
+                </th>
+
+            </tr>
+
+            </thead>
+            <tbody>
+            {% for ci in cartitems %}
+            <tr>
+                <td>
+                    <a href="ci.product.get_absolute_url"> <img src="{{ci.products.image.url}}"style="width:160px;height:150px;" class="float-left rounded custom_image"></a>
+
+                </td>
+                <td class="text-left">
+                    <b>Product:</b> {{ci.products.name}}
+                    <br>
+                    <b>id:</b> {{ci.products.id}}
+                    <br>
+                    <b>price:</b> {{ci.products.price}}
+                    <br>
+                   <b>Qty:</b>{{ci.qty}} * {{ci}}
+                </td>
+                <td>
+                    ₹{{ci.subtotal}}
+                </td>
+                {% if ci.qty < ci.products.stock %}
+                <td>
+                    <a href="{% url 'cart:add_cart' ci.products.id %}" class="custom_a " ><i class="fa fa-plus custom_icon "> </i></a>&nbsp;
+                    &nbsp;<a href="{% url 'cart:remove' ci.products.id %}" class="custom_a" ><i class="fa fa-minus custom_icon "></i></a>
+                    &nbsp;<a href="{% url 'cart:delete' ci.products.id %}" class="custom_a" ><i class="fa fa-trash custom_icon "></i></a>
+                </td>
+                {% else %}
+                <td>
+                    &nbsp;<a href="{% url 'cart:remove' ci.products.id %}" class="custom_a" ><i class="fa-fa minus custom_icon "></i></a>
+                    &nbsp;<a href="{% url 'cart:delete' ci.products.id %}" class="custom_a" ><i class="fa-fa trash custom_icon "></i></a>
+
+                </td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-5 text-center">
+        <table class="table Mytable">
+            <thead class="Myhead">
+            <tr>
+                <th>
+                    Checkout
+                </th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-center">
+                    Please post a review about you buying product
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                   total price of the items in the cart: ₹{{total}}
+
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+
+
+<div class="mx-auto">
+    <a href="{% url 'shop:allproducts' %}" class="btn btn-primary Mybutton">Continue shoppping</a>
+    <a href="{% url 'shop:allproducts' %}" class="btn btn-primary Mybutton">Make payment</a>
+</div>
+</div>
+    </div>
+{% endif %}
+</div>
+{% endblock %}
